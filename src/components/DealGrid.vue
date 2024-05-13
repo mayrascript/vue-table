@@ -45,7 +45,6 @@ export default {
 
     const updateParent = (deal) => {
       inputData.value = deal;
-      console.log("COMPONENT A: updateParent", deal)
 
       emit('updateData', inputData.value);
     };

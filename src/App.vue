@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <DealGrid :data="sharedData" @updateData="updateData"/>
-    <TaskPane :data="sharedData" />
+    <TaskPane :data="sharedData" :isOpenFormOutside="isOpenFormOutside" @isOpenFormOutsideEvent="isOpenFormOutsideEvent"/>
   </div>
 </template>
 
@@ -17,15 +17,22 @@ export default {
   },
   setup() {
     const sharedData = ref([]);
+    const isOpenFormOutside = ref(false);
+
 
     const updateData = (newData) => {
-      console.log("PARENT COMPONENT: updateData", newData)
       sharedData.value = newData;
+      isOpenFormOutside.value = true;
     };
+    const isOpenFormOutsideEvent = (isOpen) => {
+      isOpenFormOutside.value = isOpen;
+    }
 
     return {
       sharedData,
-      updateData
+      updateData,
+      isOpenFormOutsideEvent,
+      isOpenFormOutside
     };
   }
 };

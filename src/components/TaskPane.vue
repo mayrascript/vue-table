@@ -16,19 +16,31 @@ export default {
     data: {
       type: Object,
       required: true
-    }
+    },
+    isOpenFormOutside: {
+      type: Boolean,
+      required: false
+    },
   },
-  setup(props) {
+  setup(props, {emit}) {
 
-    const isOpen = ref(true);
+    const isOpen = ref(false);
 
     const openTaskPane = () => {
       isOpen.value = true;
+      emit('isOpenFormOutsideEvent', isOpen.value);
     };
 
     const closeTaskPane = () => {
       isOpen.value = false;
+      emit('isOpenFormOutsideEvent', isOpen.value);
     };
+
+    onUpdated(() => {
+      if(props.isOpenFormOutside) {
+        openTaskPane()
+      }
+    })
 
     return {
       props,
