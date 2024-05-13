@@ -21,8 +21,16 @@ export default {
 
 
     const updateData = (newData) => {
-      sharedData.value = newData;
-      isOpenFormOutside.value = true;
+      const parsedData = JSON.parse(JSON.stringify(newData.value));
+      const singleData =  parsedData?.[0];
+
+      if(!singleData) {
+        isOpenFormOutside.value = false;
+      }else {
+        const isMultipleSelection = parsedData?.length > 1;
+        isOpenFormOutside.value = !isMultipleSelection;
+        sharedData.value = singleData;
+      }
     };
     const isOpenFormOutsideEvent = (isOpen) => {
       isOpenFormOutside.value = isOpen;

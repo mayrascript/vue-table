@@ -39,6 +39,8 @@ export default {
     onUpdated(() => {
       if(props.isOpenFormOutside) {
         openTaskPane()
+      }else {
+        closeTaskPane()
       }
     })
 

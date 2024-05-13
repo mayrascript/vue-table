@@ -17,7 +17,7 @@
       </thead>
       <tbody>
       <tr v-for="deal in filteredDeals" :key="deal.id"
-          @click="selectDeal(deal); updateParent(deal)"
+          @click="selectDeal(deal);"
           :class="{ selected: selectedDeals.includes(deal) }">
         <td v-for="column in columns" :key="column.key">
             <span v-if="column.type === 'string[]'">
@@ -43,8 +43,8 @@ export default {
     const props = defineProps(['data'])
     const inputData = ref('');
 
-    const updateParent = (deal) => {
-      inputData.value = deal;
+    const updateParent = (deals) => {
+      inputData.value = deals;
 
       emit('updateData', inputData.value);
     };
@@ -117,8 +117,10 @@ export default {
       if (selectedDeals.value.includes(deal)) {
         selectedDeals.value = selectedDeals.value.filter(d => d !== deal);
       } else {
-        selectedDeals.value = [deal];
+        selectedDeals.value = [...selectedDeals.value].concat([deal]);
       }
+
+      updateParent(selectedDeals)
     };
 
     const exportToCSV = () => {
