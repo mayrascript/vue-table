@@ -31,7 +31,10 @@ export default {
     };
 
     return {
-      props
+      props,
+      openTaskPane,
+      closeTaskPane,
+      isOpen
     }
   }
 }
@@ -45,7 +48,7 @@ export default {
   width: 300px;
   position: fixed;
   top: 0;
-  right: 0;
+  right: -300px;
   transition: right 0.3s ease;
   outline: 1px solid red;
   height: 100%;
@@ -53,7 +56,7 @@ export default {
   padding: 16px;
 
   &.task-pane-open {
-    right: 300px;
+    right: 0;
   }
 
   .content {
