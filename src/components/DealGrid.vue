@@ -17,7 +17,7 @@
       </thead>
       <tbody>
       <tr v-for="deal in filteredDeals" :key="deal.id"
-          @click="selectDeal(deal)"
+          @click="selectDeal(deal); updateParent(deal)"
           :class="{ selected: selectedDeals.includes(deal) }">
         <td v-for="column in columns" :key="column.key">
             <span v-if="column.type === 'string[]'">
@@ -34,11 +34,22 @@
 </template>
 
 <script>
-import { ref, computed, onMounted } from 'vue';
+
+import { ref, computed, onMounted, defineProps, defineEmits } from 'vue';
 import axios from 'axios';
 
 export default {
-  setup() {
+  setup(_, { emit }) {
+    const props = defineProps(['data'])
+    const inputData = ref('');
+
+    const updateParent = (deal) => {
+      inputData.value = deal;
+      console.log("COMPONENT A: updateParent", deal)
+
+      emit('updateData', inputData.value);
+    };
+
     const columns = ref(   [{ key: 'id', type: 'int', label: 'ID' },
       { key: 'issuer_name', type: 'string', label: 'Issuer' },
       { key: 'deal_name', type: 'string', label: 'Deal' },
@@ -60,9 +71,9 @@ export default {
       try {
         const response = await axios.get('../src/data/deals.json');
         deals.value = response.data;
-       } catch (error) {
-         console.error('Error fetching deals:', error);
-       }
+      } catch (error) {
+        console.error('Error fetching deals:', error);
+      }
     });
 
     const filteredDeals = computed(() => {
@@ -109,6 +120,9 @@ export default {
       } else {
         selectedDeals.value = [deal];
       }
+
+/*      console.log('selectedDeals',JSON.parse( JSON.stringify(selectedDeals.value)))
+      updateParent(selectedDeals.value)*/
     };
 
     const exportToCSV = () => {
@@ -143,7 +157,9 @@ export default {
       selectedDeals,
       sortColumn,
       selectDeal,
-      exportToCSV
+      exportToCSV,
+      inputData,
+      updateParent
     };
   },
 };

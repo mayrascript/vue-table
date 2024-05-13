@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <DealGrid />
-    <TaskPane />
+    <DealGrid :data="sharedData" @updateData="updateData"/>
+    <TaskPane :data="sharedData" />
   </div>
 </template>
 
@@ -16,10 +16,19 @@ export default {
     DealGrid,
   },
   setup() {
-    const selectedDeals = ref([]);
-    provide('selectedDeals', selectedDeals);
+    const sharedData = ref([]);
 
-    return {};
+    const updateData = (newData) => {
+      console.log("PARENT COMPONENT: updateData", newData)
+      sharedData.value = newData;
+    };
+    /*const selectedDeals = ref([]);
+    provide('selectedDeals', selectedDeals);*/
+
+    return {
+      sharedData,
+      updateData
+    };
   }
 };
 </script>

@@ -1,23 +1,43 @@
 <template>
   <div :class="{ 'task-pane-open': isOpen }" class="task-pane">
     <div class="content">
+      <p>ID: {{ data?.id }}</p>
+      <p>Issues Name: {{ data?.issuer_name }}</p>
     </div>
     <button @click="closeTaskPane" class="close-button">Close</button>
   </div>
 </template>
 
-<script setup>
-import { ref } from 'vue';
+<script>
+import { ref, defineProps, onUpdated } from 'vue'
 
-const isOpen = ref(true);
+export default {
+  props: {
+    data: {
+      type: Object,
+      required: true
+    }
+  },
+  setup(props) {
 
-const openTaskPane = () => {
-  isOpen.value = true;
-};
+    const isOpen = ref(true);
 
-const closeTaskPane = () => {
-  isOpen.value = false;
-};
+    const openTaskPane = () => {
+      isOpen.value = true;
+    };
+
+    const closeTaskPane = () => {
+      isOpen.value = false;
+    };
+
+    return {
+      props
+    }
+  }
+}
+
+
+
 </script>
 
 <style lang="scss">
@@ -25,7 +45,7 @@ const closeTaskPane = () => {
   width: 300px;
   position: fixed;
   top: 0;
-  right: -300px;
+  right: 0;
   transition: right 0.3s ease;
   outline: 1px solid red;
   height: 100%;
@@ -33,7 +53,7 @@ const closeTaskPane = () => {
   padding: 16px;
 
   &.task-pane-open {
-    right: 0;
+    right: 300px;
   }
 
   .content {
