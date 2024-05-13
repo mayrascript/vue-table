@@ -120,9 +120,6 @@ export default {
       } else {
         selectedDeals.value = [deal];
       }
-
-/*      console.log('selectedDeals',JSON.parse( JSON.stringify(selectedDeals.value)))
-      updateParent(selectedDeals.value)*/
     };
 
     const exportToCSV = () => {

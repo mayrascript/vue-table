@@ -22,8 +22,6 @@ export default {
       console.log("PARENT COMPONENT: updateData", newData)
       sharedData.value = newData;
     };
-    /*const selectedDeals = ref([]);
-    provide('selectedDeals', selectedDeals);*/
 
     return {
       sharedData,
