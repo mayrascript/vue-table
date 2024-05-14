@@ -1,39 +1,42 @@
 <template>
   <div id="app">
-    <DealGrid :data="sharedData" @updateData="updateData"/>
-    <TaskPane :data="sharedData" :isOpenFormOutside="isOpenFormOutside" @isOpenFormOutsideEvent="isOpenFormOutsideEvent"/>
+    <DealGrid :data="sharedData" @updateData="updateData" />
+    <TaskPane
+      :data="sharedData"
+      :isOpenFormOutside="isOpenFormOutside"
+      @isOpenFormOutsideEvent="isOpenFormOutsideEvent"
+    />
   </div>
 </template>
 
 <script>
-import DealGrid from './components/DealGrid.vue';
-import { provide, ref } from 'vue';
+import DealGrid from '@/components/DealGrid.vue'
 import TaskPane from '@/components/TaskPane.vue'
+import { ref } from 'vue'
 
 export default {
   components: {
     TaskPane,
-    DealGrid,
+    DealGrid
   },
   setup() {
-    const sharedData = ref([]);
-    const isOpenFormOutside = ref(false);
-
+    const sharedData = ref([])
+    const isOpenFormOutside = ref(false)
 
     const updateData = (newData) => {
-      const parsedData = JSON.parse(JSON.stringify(newData.value));
-      const singleData =  parsedData?.[0];
+      const parsedData = JSON.parse(JSON.stringify(newData.value))
+      const singleData = parsedData?.[0]
 
-      if(!singleData) {
-        isOpenFormOutside.value = false;
-      }else {
-        const isMultipleSelection = parsedData?.length > 1;
-        isOpenFormOutside.value = !isMultipleSelection;
-        sharedData.value = singleData;
+      if (!singleData) {
+        isOpenFormOutside.value = false
+      } else {
+        const isMultipleSelection = parsedData?.length > 1
+        isOpenFormOutside.value = !isMultipleSelection
+        sharedData.value = singleData
       }
-    };
+    }
     const isOpenFormOutsideEvent = (isOpen) => {
-      isOpenFormOutside.value = isOpen;
+      isOpenFormOutside.value = isOpen
     }
 
     return {
@@ -41,7 +44,7 @@ export default {
       updateData,
       isOpenFormOutsideEvent,
       isOpenFormOutside
-    };
+    }
   }
-};
+}
 </script>
