@@ -1,7 +1,10 @@
 <template>
   <div class="deal-grid">
-    <div class="search-bar">
-      <input type="text" placeholder="Search Deals" v-model="searchQuery" />
+    <div class="deal-search-wrapper">
+      <div class="search-bar">
+        <input type="text" placeholder="Search Deals" v-model="searchQuery" />
+      </div>
+      <button class="primary-button" @click="exportToCSV">Export to CSV</button>
     </div>
     <table>
       <thead>
@@ -30,8 +33,6 @@
         </tr>
       </tbody>
     </table>
-
-    <button @click="exportToCSV">Export to CSV</button>
   </div>
 </template>
 
@@ -171,8 +172,18 @@ export default {
 
 <style lang="scss">
 .deal-grid {
-  .search-bar {
-    margin-bottom: 10px;
+  .deal-search-wrapper {
+    display: flex;
+    align-items: center;
+
+    .search-bar {
+      margin: 16px 16px 16px 0;
+      flex: 1;
+      input {
+        height: 3rem;
+        width: 100%;
+      }
+    }
   }
 
   table {
