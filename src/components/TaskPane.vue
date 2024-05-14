@@ -16,7 +16,7 @@ status: string analysts: string[] doc_count: number custom_deal_identifiers: str
 </template>
 
 <script>
-import { ref, defineProps, onUpdated } from 'vue'
+import { ref, onUpdated } from 'vue'
 
 export default {
   props: {

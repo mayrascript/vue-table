@@ -37,12 +37,11 @@
 </template>
 
 <script>
-import { ref, computed, onMounted, defineProps, defineEmits } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import axios from 'axios'
 
 export default {
   setup(_, { emit }) {
-    const props = defineProps(['data'])
     const inputData = ref('')
 
     const updateParent = (deals) => {
