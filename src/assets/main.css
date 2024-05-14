@@ -1,4 +1,5 @@
 @import './base.css';
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap');
 
 #app {
   max-width: 1280px;
@@ -32,4 +33,22 @@ a,
     grid-template-columns: 1fr 1fr;
     padding: 0 2rem;
   }
+}
+
+nav {
+  height: 59px;
+  background-color: #334968;
+}
+
+.navbar-brand {
+  display: inline-block;
+  width: 59px;
+  height: 59px;
+  line-height: 59px;
+  text-align: center;
+  background: #002745;
+  font-weight: 600;
+  color: #fff;
+  text-decoration: none;
+  font-size: 38px;
 }
