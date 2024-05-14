@@ -174,6 +174,7 @@ export default {
   .deal-search-wrapper {
     display: flex;
     align-items: center;
+    margin-top: 60px;
 
     .search-bar {
       margin: 16px 16px 16px 0;
